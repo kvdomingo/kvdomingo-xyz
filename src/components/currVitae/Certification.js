@@ -4,6 +4,7 @@ import HtmlParser from "react-html-parser";
 import dateFormat from "dateformat";
 import TimelineSection from "./TimelineSection";
 import Loading from "../../shared/Loading";
+import api from "../../utils/Endpoints";
 
 export default class Certification extends React.Component {
   state = {
@@ -13,11 +14,12 @@ export default class Certification extends React.Component {
   };
 
   componentDidMount() {
-    fetch("/api/cv/certification")
-      .then(res => res.json())
-      .then(data => {
+    api.cv
+      .certifications()
+      .then(res => {
+        let { data } = res;
         let script = [];
-        data.forEach((dat, i) => {
+        data.forEach(dat => {
           dat.date_granted = dateFormat(new Date(dat.date_granted), "mmm yyyy");
           script.push(/<script>(.+)<\/script>/gi.exec(dat.description));
           if (script) {
@@ -26,8 +28,9 @@ export default class Certification extends React.Component {
         });
         this.setState({ data, script, loading: false });
         // eslint-disable-next-line
-        this.state.script.map((script, i) => (script ? window.eval(script[1]) : null));
-      });
+        this.state.script.map(script => (script ? window.eval(script[1]) : null));
+      })
+      .catch(err => console.error(err.message));
   }
 
   render() {

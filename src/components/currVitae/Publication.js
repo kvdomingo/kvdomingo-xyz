@@ -4,6 +4,7 @@ import HtmlParser from "react-html-parser";
 import dateFormat from "dateformat";
 import TimelineSection from "./TimelineSection";
 import Loading from "../../shared/Loading";
+import api from "../../utils/Endpoints";
 
 export default class Publication extends React.Component {
   state = {
@@ -12,14 +13,16 @@ export default class Publication extends React.Component {
   };
 
   componentDidMount() {
-    fetch("/api/cv/publication")
-      .then(res => res.json())
-      .then(data => {
-        data.forEach((dat, i) => {
+    api.cv
+      .publications()
+      .then(res => {
+        let { data } = res;
+        data.forEach(dat => {
           dat.publication_date = dateFormat(new Date(dat.publication_date), "mmm yyyy");
         });
         this.setState({ data, loading: false });
-      });
+      })
+      .catch(err => console.error(err.message));
   }
 
   render() {

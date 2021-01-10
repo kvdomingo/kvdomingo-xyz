@@ -4,26 +4,23 @@ import { Link, withRouter } from "react-router-dom";
 import Loading from "../../shared/Loading";
 import TitleComponent from "../../shared/TitleComponent";
 import "./Svip.css";
+import api from "../../utils/Endpoints";
 
 export default withRouter(
   class Svip extends Component {
-    constructor(props) {
-      super(props);
-      this.state = {
-        courses: [],
-        isLoaded: false,
-      };
-    }
+    state = {
+      courses: [],
+      isLoaded: false,
+    };
 
     componentDidMount() {
-      fetch("/api/svip/course")
-        .then(res => res.json())
-        .then(courses =>
-          this.setState({
-            courses,
-            isLoaded: true,
-          }),
-        );
+      api.svip
+        .courses()
+        .then(res => {
+          let courses = res.data;
+          this.setState({ courses, isLoaded: true });
+        })
+        .catch(err => console.error(err.message));
     }
 
     render() {

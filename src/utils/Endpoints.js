@@ -31,8 +31,8 @@ const api = {
     },
   },
   svip: {
-    blogposts() {
-      return axiosInstance.get("svip/blogpost");
+    blogPost(filter, slug) {
+      return axiosInstance.get(`svip/blogpost?${filter}=${slug}`);
     },
     courses() {
       return axiosInstance.get("svip/course");

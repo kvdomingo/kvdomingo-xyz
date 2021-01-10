@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import dateFormat from "dateformat";
 import TimelineSection from "./TimelineSection";
 import Loading from "../../shared/Loading";
+import api from "../../utils/Endpoints";
 
 export default class Work extends React.Component {
   state = {
@@ -12,15 +13,17 @@ export default class Work extends React.Component {
   };
 
   componentDidMount() {
-    fetch("/api/cv/work")
-      .then(res => res.json())
-      .then(data => {
-        data.forEach((dat, i) => {
+    api.cv
+      .work()
+      .then(res => {
+        let { data } = res;
+        data.forEach(dat => {
           dat.start_date = dateFormat(new Date(dat.start_date), "mmm yyyy");
           dat.end_date = dat.end_date ? dateFormat(new Date(dat.end_date), "mmm yyyy") : "present";
         });
         this.setState({ data, loading: false });
-      });
+      })
+      .catch(err => console.error(err.message));
   }
 
   render() {

@@ -6,6 +6,7 @@ import imagesLoaded from "imagesloaded/imagesloaded";
 import { SRLWrapper } from "simple-react-lightbox";
 import TitleComponent from "../../shared/TitleComponent";
 import "./Gallery.css";
+import api from "../../utils/Endpoints";
 
 class ClientGallery extends Component {
   constructor(props) {
@@ -24,28 +25,27 @@ class ClientGallery extends Component {
 
   handlePhotos() {
     let { clientPage } = this.props.match.params;
-    fetch(`/api/photography/clients/${clientPage}`)
-      .then(res => res.json())
-      .then(data => {
-        this.setState({ images: data.images || [] });
-        const grid = document.querySelector(".grid");
-        const msnry = new Masonry(grid, {
-          itemSelector: ".grid-item",
-          columnWidth: ".grid-sizer",
-          percentPosition: true,
-        });
-        const imgLoad = new imagesLoaded(grid);
-        imgLoad.on("progress", () => {
-          msnry.layout();
-          this.setState({ isLoaded: true });
-        });
-        imgLoad.on("done", () => {
-          msnry.layout();
-        });
-        imgLoad.on("always", () => {
-          msnry.layout();
-        });
+    api.photography.clients(clientPage).then(res => {
+      let { data } = res;
+      this.setState({ images: data.images || [] });
+      const grid = document.querySelector(".grid");
+      const msnry = new Masonry(grid, {
+        itemSelector: ".grid-item",
+        columnWidth: ".grid-sizer",
+        percentPosition: true,
       });
+      const imgLoad = new imagesLoaded(grid);
+      imgLoad.on("progress", () => {
+        msnry.layout();
+        this.setState({ isLoaded: true });
+      });
+      imgLoad.on("done", () => {
+        msnry.layout();
+      });
+      imgLoad.on("always", () => {
+        msnry.layout();
+      });
+    });
   }
 
   render() {

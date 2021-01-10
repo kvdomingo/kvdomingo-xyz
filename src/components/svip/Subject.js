@@ -4,6 +4,7 @@ import { Link, Route, withRouter } from "react-router-dom";
 import Loading from "../../shared/Loading";
 import TitleComponent from "../../shared/TitleComponent";
 import "./Svip.css";
+import api from "../../utils/Endpoints";
 
 const Gallery = lazy(() => import("./Gallery"));
 const Post = lazy(() => import("./Post"));
@@ -27,19 +28,24 @@ export default withRouter(
     componentDidMount() {
       this.handleActivePill();
       let { courseSlug } = this.props.match.params;
-      fetch(`/api/svip/blogpost?subject__slug=${courseSlug}`)
-        .then(res => res.json())
-        .then(posts => this.setState({ posts }));
-      fetch("/api/svip/course")
-        .then(res => res.json())
-        .then(courses => {
+
+      api.svip
+        .blogPost("subject__slug", courseSlug)
+        .then(res => this.setState({ posts: res.data }))
+        .catch(err => console.error(err.message));
+
+      api.svip
+        .courses()
+        .then(res => {
+          let courses = res.data;
           let subject = courses.find(course => course.slug === courseSlug);
           this.setState({
             courses,
             coursesIsLoaded: true,
             subject,
           });
-        });
+        })
+        .catch(err => console.error(err.message));
     }
 
     componentDidUpdate(prevProps, prevState) {

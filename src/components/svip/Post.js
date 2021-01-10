@@ -23,6 +23,7 @@ import AreaFigure from "./AreaFigure";
 import Loading from "../../shared/Loading";
 import PopulateTable from "./PopulateTable";
 import "./Svip.css";
+import api from "../../utils/Endpoints";
 
 export default withRouter(
   class Post extends Component {
@@ -38,12 +39,14 @@ export default withRouter(
 
     componentDidMount() {
       let { postSlug } = this.props.match.params;
-      fetch(`/api/svip/blogpost?slug=${postSlug}`)
-        .then(res => res.json())
-        .then(post => {
+      api.svip
+        .blogPost("slug", postSlug)
+        .then(res => {
+          let post = res.data;
           post = post[0];
           this.setState({ post, isLoaded: true });
-        });
+        })
+        .catch(err => console.error(err.message));
     }
 
     render() {

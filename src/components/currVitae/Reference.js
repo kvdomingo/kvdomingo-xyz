@@ -2,6 +2,7 @@ import React from "react";
 import { MDBTypography as Type } from "mdbreact";
 import TimelineSection from "./TimelineSection";
 import Loading from "../../shared/Loading";
+import api from "../../utils/Endpoints";
 
 export default class Reference extends React.Component {
   state = {
@@ -10,9 +11,13 @@ export default class Reference extends React.Component {
   };
 
   componentDidMount() {
-    fetch("/api/cv/reference")
-      .then(res => res.json())
-      .then(data => this.setState({ data, loading: false }));
+    api.cv
+      .references()
+      .then(res => {
+        let { data } = res;
+        this.setState({ data, loading: false });
+      })
+      .catch(err => console.error(err.message));
   }
 
   render() {

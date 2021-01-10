@@ -6,6 +6,7 @@ import Masonry from "masonry-layout/masonry";
 import imagesLoaded from "imagesloaded/imagesloaded";
 import { SRLWrapper } from "simple-react-lightbox";
 import "./Gallery.css";
+import api from "../../utils/Endpoints";
 
 class Gallery extends Component {
   constructor(props) {
@@ -25,9 +26,10 @@ class Gallery extends Component {
   handlePhotos() {
     let { photogPage } = this.props.match.params;
     let slug = photogPage ? photogPage : "latest";
-    fetch(`/api/photography/${slug}`)
-      .then(res => res.json())
-      .then(data => {
+    api.photography
+      .gallery(slug)
+      .then(res => {
+        let { data } = res;
         this.setState({ images: data.images || [] });
         const grid = document.querySelector(".grid");
         const msnry = new Masonry(grid, {
@@ -46,7 +48,8 @@ class Gallery extends Component {
         imgLoad.on("always", () => {
           msnry.layout();
         });
-      });
+      })
+      .catch(err => console.error(err.message));
   }
 
   render() {

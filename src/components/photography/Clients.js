@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { MDBRow as Row, MDBCol as Col, MDBCard as Card } from "mdbreact";
 import { Link, withRouter } from "react-router-dom";
 import TitleComponent from "../../shared/TitleComponent";
+import api from "../../utils/Endpoints";
 
 class Clients extends Component {
   constructor(props) {
@@ -14,9 +15,10 @@ class Clients extends Component {
   componentDidMount() {
     let { path } = this.props.match;
     if (path.split("/").slice(-1)[0] === "clients") {
-      fetch("/api/photography/client")
-        .then(res => res.json())
-        .then(clients => this.setState({ clients }));
+      api.photography
+        .client()
+        .then(res => this.setState({ clients: res.data }))
+        .catch(err => console.error(err.message));
     }
   }
 
