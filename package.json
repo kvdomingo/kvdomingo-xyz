@@ -1,14 +1,41 @@
 {
   "name": "kvdomingo-xyz",
+  "author": "Kenneth V. Domingo <kvdomingo@up.edu.ph>",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.8",
     "@testing-library/react": "^11.2.3",
     "@testing-library/user-event": "^12.6.0",
+    "aos": "^2.3.4",
+    "axios": "^0.21.1",
+    "cloudinary-core": "^2.11.3",
+    "cloudinary-react": "^1.6.8",
+    "dateformat": "^4.4.1",
+    "flickity": "^2.2.2",
+    "flickity-fullscreen": "^1.1.1",
+    "flickity-imagesloaded": "^2.0.0",
+    "imagesloaded": "^4.1.4",
+    "juxtaposejs": "^1.1.6",
+    "masonry-layout": "^4.2.2",
+    "mathjax": "^3.1.2",
+    "mdbreact": "^5.0.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "react-flickity-component": "^3.6.0",
+    "react-fontawesome": "^1.7.1",
+    "react-helmet": "^6.1.0",
+    "react-highlight.js": "^1.0.7",
+    "react-html-parser": "^2.0.2",
+    "react-iframe": "^1.8.0",
+    "react-jsx-parser": "^1.28.1",
+    "react-masonry-component": "^6.2.1",
+    "react-mathjax": "^1.0.1",
+    "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
+    "react-transition-group": "^4.4.1",
+    "react-typing-animation": "^1.6.2",
+    "simple-react-lightbox": "^3.5.2",
     "web-vitals": "^0.2.4"
   },
   "scripts": {
@@ -17,12 +44,19 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+  "engines": {
+    "node": "12.16.1",
+    "npm": "6.14.5"
+  },
   "eslintConfig": {
     "extends": [
       "react-app",
       "react-app/jest"
     ]
   },
+  "eslintIgnore": [
+    "content/"
+  ],
   "browserslist": {
     "production": [
       ">0.2%",
@@ -34,5 +68,25 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "devDependencies": {
+    "dotenv": "^8.2.0",
+    "prettier": "^2.2.1",
+    "prop-types": "^15.7.2",
+    "react-router-sitemap": "^1.2.0"
+  },
+  "prettier": {
+    "arrowParens": "avoid",
+    "bracketSpacing": true,
+    "jsxSingleQuote": false,
+    "printWidth": 120,
+    "quoteProps": "consistent",
+    "semi": true,
+    "singleQuote": false,
+    "tabWidth": 2,
+    "trailingComma": "all"
+  },
+  "prettierIgnore": [
+    "content/"
+  ]
 }

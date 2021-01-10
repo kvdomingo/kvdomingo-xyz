@@ -1,0 +1,116 @@
+.section-header {
+  font-family: 'GeoNMS', sans-serif;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+}
+
+.cover-photo {
+  height: auto;
+}
+
+@media (min-width: 1024px) {
+  .cover-photo {
+    height: 100vh;
+  }
+}
+
+.carousel-cell {
+  overflow: hidden;
+}
+
+.carousel-cell img {
+  display: block;
+}
+
+.console {
+  background-color: #111;
+  border-radius: 10px;
+  overflow: auto;
+}
+
+.console-bar {
+  background-color: rgb(224, 224, 224);
+  border-radius: 10px 10px 0 0;
+  height: 25px;
+}
+
+.console-bar-red {
+  background-color: red;
+  border-radius: 50%;
+  display: inline-block;
+  height: 10px;
+  margin-right: 3px;
+  text-align: center;
+  width: 10px;
+}
+
+.console-bar-yellow {
+  background-color: orange;
+  border-radius: 50%;
+  display: inline-block;
+  height: 10px;
+  margin-right: 3px;
+  text-align: center;
+  width: 10px;
+}
+
+.console-bar-green {
+  background-color: seagreen;
+  border-radius: 50%;
+  display: inline-block;
+  height: 10px;
+  margin-right: 3px;
+  text-align: center;
+  width: 10px;
+}
+
+.console-bar-title {
+  color: #000;
+  display: inline-block;
+}
+
+.code-command {
+  display: block;
+}
+
+.code-command code {
+  overflow: hidden;
+}
+
+.cursor {
+  animation: blink-caret 0.75s step-end infinite;
+  border-right: 1px solid white;
+  margin-left: 3px;
+}
+
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: white; }
+}
+
+.code-command code:before {
+  color: white;
+  content: '$ ';
+  display: inline;
+  font-family: monospace;
+}
+
+.code-response {
+  color: #fff;
+  display: block;
+}
+
+img[alt="React.js/React Native"] {
+  animation: spin 10s linear infinite;
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(180deg);
+  }
+}

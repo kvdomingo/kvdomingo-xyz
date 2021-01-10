@@ -1,13 +1,26 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@font-face {
+  font-family: 'GeoNMS';
+  src: local('GeosansLight-NMS'), url("fonts/geonms-font.ttf") format('truetype');
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+body {
+  font-family: 'Rubik', 'GeoNMS', sans-serif;
+}
+
+@media (min-width: 576px) {
+  body {
+    font-size: 1em;
+  }
+}
+
+@media (min-width: 768px) {
+  body {
+    font-size: 1.05em;
+  }
+}
+
+@media (min-width: 992px) {
+  body {
+    font-size: 1.1em;
+  }
 }

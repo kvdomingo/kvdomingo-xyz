@@ -1,0 +1,52 @@
+p {
+    padding-bottom: 5pt;
+    padding-top: 5pt;
+}
+
+.card-cover {
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+h3 {
+    padding-top: 20pt;
+}
+
+h4 {
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+ol.reference {
+    counter-reset: spp-counter;
+    list-style: none;
+}
+
+ol.reference li {
+    counter-increment: spp-counter;
+}
+
+ol.reference li::before {
+    content: '[' counter(spp-counter) ']';
+    margin-left: -2rem;
+    margin-right: 1rem;
+}
+
+.math-container {
+    overflow-x: auto;
+}
+
+div.row-cols-1 {
+    counter-reset: subfig-counter;
+    list-style-type: lower-alpha;
+}
+
+div.row-cols-1 div.col div.subfigure {
+    counter-increment: subfig-counter;
+}
+
+div.row-cols-1 div.col div.subfigure::before {
+    content: '(' counter(subfig-counter, lower-alpha) ')';
+    margin-right: 0.25rem;
+}

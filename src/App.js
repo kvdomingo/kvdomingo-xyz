@@ -1,25 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Suspense } from "react";
+import AOS from "aos";
+import { BrowserRouter as Router } from "react-router-dom";
+import Navbar from "./shared/Navbar";
+import Footer from "./shared/Footer";
+import Routes from "./shared/Routes";
+import Loading from "./shared/FullPageLoading";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export default class App extends React.Component {
+  componentDidMount() {
+    AOS.init();
+  }
+
+  render() {
+    return (
+      <Router>
+        <Navbar />
+        <Suspense fallback={<Loading />}>{Routes}</Suspense>
+        <Footer />
+      </Router>
+    );
+  }
 }
-
-export default App;
