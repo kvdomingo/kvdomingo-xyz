@@ -1,5 +1,5 @@
 import React, { lazy } from "react";
-import { Route, Switch } from "react-router-dom";
+import { Redirect, Route, Switch } from "react-router-dom";
 import { CSSTransition } from "react-transition-group";
 
 const Home = lazy(() => import("../components/landing/Landing")),
@@ -11,9 +11,17 @@ const Home = lazy(() => import("../components/landing/Landing")),
   Dev = lazy(() => import("../components/dev/Dev")),
   Err404 = lazy(() => import("./404"));
 
+const { NODE_ENV } = process.env;
+
+const RedirectComponent = () => {
+  const url = NODE_ENV === "development" ? "http://localhost:8000/admin/" : "https://kvdomingo.herokuapp.com/admin/";
+  window.location.assign(url);
+};
+
 const transitionTimeout = 300,
   transitionName = "page",
   routes = [
+    { path: "/admin", name: "Admin", Component: RedirectComponent },
     { path: "/about", name: "About", Component: About },
     { path: "/cv", name: "CV", Component: CurrVitae },
     { path: "/photography", name: "Photography", Component: Photography },
@@ -26,7 +34,7 @@ const transitionTimeout = 300,
 export default (
   <Switch>
     {routes.map(({ path, Component }, i) => (
-      <Route key={i} path={path}>
+      <Route key={i} path={path} exact={path === "/"}>
         {({ match }) => (
           <CSSTransition in={match != null} timeout={transitionTimeout} classNames={transitionName} unmountOnExit>
             <Component />
