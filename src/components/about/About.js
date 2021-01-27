@@ -1,12 +1,30 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { MDBCol as Col, MDBRow as Row, MDBContainer as Container } from "mdbreact";
 import { Image } from "cloudinary-react";
 import TitleComponent from "../../shared/TitleComponent";
+import Loading from "../../shared/Loading";
+import api from "../../utils/Endpoints";
+import JsxParser from "react-jsx-parser";
 import "./About.css";
 
 export default function About() {
-  return (
-    <React.Fragment>
+  const [loading, setLoading] = useState(true);
+  const [data, setData] = useState({});
+
+  useEffect(() => {
+    api.home
+      .about()
+      .then(res => {
+        setData(res.data[0]);
+        setLoading(false);
+      })
+      .catch(err => console.error(err.message));
+  }, []);
+
+  return loading ? (
+    <Loading />
+  ) : (
+    <>
       <TitleComponent
         title="About"
         description="About Kenneth V. Domingo and KVD Studio"
@@ -19,7 +37,7 @@ export default function About() {
             <Image
               cloudName={"kdphotography-assets"}
               className="img-fluid image-shadow"
-              publicId={"kdphotography/portfolio/static/portfolio/media-private/about/bio"}
+              publicId={data.picture}
               secure
               responsive
               responsiveUseBreakpoints
@@ -29,22 +47,7 @@ export default function About() {
             />
           </Col>
           <Col md="8" className="pl-3 pl-md-5">
-            <p>
-              Hi, I'm Kenneth V. Domingo! I am an applied physics graduate from the University of the
-              Philippines-Diliman. For my undergraduate thesis, I joined the Instrumentation Physics Laboratory with a
-              research concentration on signal, video, and image processing. In my spare time, I like to dabble a bit in
-              various fields like music composition & production, photography, artificial intelligence, electronics, and
-              bioinformatics, to name a few. I am also an alumni and former Executive Officer for Promotions and
-              Documentation of UP Iris, a university-wide photography organization.
-            </p>
-            <p>
-              During my latter college years, I took several online classes and tutorials on web and mobile development
-              (yup, not exactly related to my course). Because I primarily used Python in my research, my go-to stack is
-              Django-React.js, and I primarily deploy web apps to Heroku and Vercel. Currently, I have several completed
-              and ongoing web projects that I developed on my own, and I am also looking for web/software
-              development-related jobs.
-            </p>
-            <p>Feel free to contact me for inquiries, collaborations, and other concerns!</p>
+            <JsxParser jsx={data.bio} />
             <div>
               <a href="/cv" className="ml-0 btn btn-outline-black">
                 CV
@@ -56,6 +59,6 @@ export default function About() {
           </Col>
         </Row>
       </Container>
-    </React.Fragment>
+    </>
   );
 }

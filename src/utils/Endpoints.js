@@ -8,6 +8,9 @@ const axiosInstance = axios.create({ baseURL });
 
 const api = {
   home: {
+    about() {
+      return axiosInstance.get("home/about");
+    },
     content() {
       return axiosInstance.get("home/content");
     },
