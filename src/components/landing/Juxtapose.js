@@ -4,7 +4,7 @@ import "juxtaposejs/build/css/juxtapose.css";
 
 export default class Juxtapose extends React.Component {
   componentDidMount() {
-    // eslint-disable-next-line no-undef
+    // eslint-disable-next-line
     const slider = new juxtapose.JXSlider(
       "#juxtapose",
       [

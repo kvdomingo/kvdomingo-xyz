@@ -1,5 +1,5 @@
 import React, { lazy } from "react";
-import { Redirect, Route, Switch } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import { CSSTransition } from "react-transition-group";
 
 const Home = lazy(() => import("../components/landing/Landing")),

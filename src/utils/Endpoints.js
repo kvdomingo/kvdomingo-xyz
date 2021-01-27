@@ -1,11 +1,16 @@
 import axios from "axios";
 
-const baseURL = "https://kvdomingo.herokuapp.com/api/";
+const { NODE_ENV } = process.env;
+
+const baseURL = NODE_ENV === "development" ? "http://localhost:8000/api/" : "https://kvdomingo.herokuapp.com/api/";
 
 const axiosInstance = axios.create({ baseURL });
 
 const api = {
   home: {
+    content() {
+      return axiosInstance.get("home/content");
+    },
     technologies() {
       return axiosInstance.get("home/technology");
     },
