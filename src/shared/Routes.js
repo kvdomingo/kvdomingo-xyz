@@ -14,7 +14,7 @@ const Home = lazy(() => import("../components/landing/Landing")),
 const { NODE_ENV } = process.env;
 
 const RedirectComponent = () => {
-  const url = NODE_ENV === "development" ? "http://localhost:8000/admin/" : "https://kvdomingo.herokuapp.com/admin/";
+  const url = NODE_ENV === "development" ? "http://localhost:8000/admin/" : "https://api.kvdomingo.xyz/admin/";
   window.location.assign(url);
 };
 
