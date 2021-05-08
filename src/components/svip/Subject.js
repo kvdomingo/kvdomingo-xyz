@@ -1,13 +1,12 @@
-import React, { Component, lazy } from "react";
+import { Component } from "react";
 import { MDBContainer as Container, MDBIcon as Icon } from "mdbreact";
 import { Link, Route, withRouter } from "react-router-dom";
 import Loading from "../../shared/Loading";
 import TitleComponent from "../../shared/TitleComponent";
 import "./Svip.css";
 import api from "../../utils/Endpoints";
-
-const Gallery = lazy(() => import("./Gallery"));
-const Post = lazy(() => import("./Post"));
+import Gallery from "./Gallery";
+import Post from "./Post";
 
 export default withRouter(
   class Subject extends Component {
@@ -68,7 +67,7 @@ export default withRouter(
       let { path } = this.props.match;
       let { courseSlug } = this.props.match.params;
       return (
-        <React.Fragment>
+        <>
           <TitleComponent
             title={`${this.state.subject.name} | Coursework`}
             description={`Portfolio & coursework on ${this.state.subject.name} (${this.state.subject.title}): ${this.state.subject.description}`}
@@ -97,7 +96,7 @@ export default withRouter(
               </Route>
             </Container>
           )}
-        </React.Fragment>
+        </>
       );
     }
   },
